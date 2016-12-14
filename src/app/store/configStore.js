@@ -1,10 +1,16 @@
 import {createStore, applyMiddleware} from 'redux';
-import petReducer from '../reducers/petReducer';
-import thunk from 'redux-thunk';
+import rootReducers from '../reducers/reducers';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+
+const loggerMiddleware = createLogger();
 
 export default function configureStore() {
   return createStore(
-    petReducer,
-    applyMiddleware(thunk)
+    rootReducers,
+    applyMiddleware(
+      thunkMiddleware, // lets us dispatch() functions
+      loggerMiddleware // neat middleware that logs actions
+    )
   );
 }
