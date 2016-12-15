@@ -8,6 +8,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import routes from './routes';
 import './index.scss';
+// Vendors
+import '../node_modules/material-design-lite/material.min.css';
+import '../node_modules/material-design-lite/material.min.js';
 
 // Needed for onTouchTap (marerial-ui)
 // http://stackoverflow.com/a/34015469/988941

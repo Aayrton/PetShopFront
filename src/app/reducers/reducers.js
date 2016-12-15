@@ -3,7 +3,6 @@ import {
   CREATE_PET, CREATE_PET_SUCCESS, CREATE_PET_FAILURE,
   DELETE_PET, DELETE_PET_SUCCESS, DELETE_PET_FAILURE
 } from '../actions/petActions';
-import {without} from 'lodash';
 
 const initialState = {
   isFetching: false,
@@ -60,7 +59,9 @@ function petApp(state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         failure: false,
-        pets: without([...state.pets], action.pet)
+        pets: [...state.pets].filter(pet => {
+          return pet.id !== action.pet.id;
+        })
       });
 
     case DELETE_PET_FAILURE:
