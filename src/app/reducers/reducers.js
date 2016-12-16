@@ -1,20 +1,28 @@
 import {
-  FETCH_PETS, FETCH_PETS_SUCCESS, FETCH_PETS_FAILURE,
-  CREATE_PET, CREATE_PET_SUCCESS, CREATE_PET_FAILURE,
-  DELETE_PET, DELETE_PET_SUCCESS, DELETE_PET_FAILURE
+  REQUEST_PETS, REQUEST_PETS_FAILURE, FETCH_PETS_SUCCESS,
+  CREATE_PET_SUCCESS, DELETE_PET_SUCCESS, UPDATE_PET_SUCCESS,
+  GET_PET_SUCCESS
 } from '../actions/petActions';
 
 const initialState = {
   isFetching: false,
   failure: false,
-  pets: []
+  pets: [],
+  pet: {}
 };
 
 function petApp(state = initialState, action) {
   switch (action.type) {
-    case FETCH_PETS:
+    case REQUEST_PETS:
       return Object.assign({}, state, {
         isFetching: true
+      });
+
+    case REQUEST_PETS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        failure: true,
+        message: action.error
       });
 
     case FETCH_PETS_SUCCESS:
@@ -24,16 +32,11 @@ function petApp(state = initialState, action) {
         pets: action.pets
       });
 
-    case FETCH_PETS_FAILURE:
+    case GET_PET_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        failure: true,
-        message: action.error
-      });
-
-    case CREATE_PET:
-      return Object.assign({}, state, {
-        isFetching: true
+        failure: false,
+        pet: action.pet
       });
 
     case CREATE_PET_SUCCESS:
@@ -43,16 +46,11 @@ function petApp(state = initialState, action) {
         pets: [action.pet, ...state.pets]
       });
 
-    case CREATE_PET_FAILURE:
+    case UPDATE_PET_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        failure: true,
-        message: action.error
-      });
-
-    case DELETE_PET:
-      return Object.assign({}, state, {
-        isFetching: true
+        failure: false,
+        pet: action.pet
       });
 
     case DELETE_PET_SUCCESS:
@@ -62,13 +60,6 @@ function petApp(state = initialState, action) {
         pets: [...state.pets].filter(pet => {
           return pet.id !== action.pet.id;
         })
-      });
-
-    case DELETE_PET_FAILURE:
-      return Object.assign({}, state, {
-        isFetching: false,
-        failure: true,
-        message: action.error
       });
 
     default:

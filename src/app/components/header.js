@@ -1,8 +1,10 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
+import {Navbar, NavItem} from 'react-materialize';
 
 const Header = () => (
-  <AppBar title="PetShop" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+  <Navbar brand="PetShop" right>
+    <NavItem href="get-started.html">Homepage</NavItem>
+  </Navbar>
 );
 
 export default Header;

@@ -25,8 +25,8 @@ module.exports = {
         test: /\.(css|scss)$/,
         loaders: [
           'style-loader',
-          'css-loader',
-          'sass-loader',
+          'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+          'sass-loader?sourceMap',
           'postcss-loader'
         ]
       },
@@ -50,6 +50,11 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {
+        sassLoader: {
+            includePaths: [path.resolve(__dirname, 'src', 'scss')]
+        },
+        context: __dirname,
+        output: { path :  './' },
         postcss: () => [autoprefixer]
       },
       debug: true

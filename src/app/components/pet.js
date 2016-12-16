@@ -1,9 +1,6 @@
 import React, {PropTypes} from 'react';
-// import FlatButton from 'material-ui/FlatButton';
-import {TableRow, TableRowColumn} from 'material-ui/Table';
-import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
-import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import {Link} from 'react-router';
+import {Button} from 'react-materialize';
 
 class Pet extends React.Component {
   constructor(props) {
@@ -19,26 +16,25 @@ class Pet extends React.Component {
 
   render() {
     return (
-      <TableRow>
-        <TableRowColumn>{this.props.id}</TableRowColumn>
-        <TableRowColumn>{this.props.name}</TableRowColumn>
-        <TableRowColumn>{this.props.description}</TableRowColumn>
-        <TableRowColumn>
-          <FloatingActionButton
-            mini={Boolean(true)}
-            secondary={Boolean(true)}
+      <tr>
+        <td>{this.props.id}</td>
+        <td>{this.props.name}</td>
+        <td>{this.props.size}</td>
+        <td>{this.props.weight}</td>
+        <td>{this.props.price}</td>
+        <td>{this.props.createdAt}</td>
+        <td>
+
+          <Link to={`/pet/${this.props.id}`} className="btn-floating waves-effect waves-light">+</Link>
+          <Button
+            floating
+            className="red"
+            waves="light"
+            icon="add"
             onClick={this.handleDeleteClick}
-            >
-            <DeleteForever/>
-          </FloatingActionButton>
-          <FloatingActionButton
-            mini={Boolean(true)}
-            default={Boolean(true)}
-            >
-            <ModeEdit/>
-          </FloatingActionButton>
-        </TableRowColumn>
-      </TableRow>
+            />
+        </td>
+      </tr>
     );
   }
 }
@@ -46,7 +42,10 @@ class Pet extends React.Component {
 Pet.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  size: PropTypes.number,
+  weight: PropTypes.number,
+  price: PropTypes.number,
+  createdAt: PropTypes.string,
   deletePet: PropTypes.func.isRequired
 };
 

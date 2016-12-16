@@ -15,9 +15,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const items = connect(
+const petListConnect = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PetList);
 
-export default items;
+export default petListConnect;
