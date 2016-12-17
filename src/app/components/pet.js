@@ -19,18 +19,19 @@ class Pet extends React.Component {
       <tr>
         <td>{this.props.id}</td>
         <td>{this.props.name}</td>
-        <td>{this.props.size}</td>
-        <td>{this.props.weight}</td>
-        <td>{this.props.price}</td>
-        <td>{this.props.createdAt}</td>
+        <td>{this.props.size}m</td>
+        <td>{this.props.weight}kg</td>
+        <td>{this.props.price} €</td>
         <td>
 
-          <Link to={`/pet/${this.props.id}`} className="btn-floating waves-effect waves-light">+</Link>
+          <Link to={`/pet/${this.props.id}`} className="btn-floating waves-effect waves-light">
+            <i className="material-icons">edit</i>
+          </Link>
           <Button
             floating
             className="red"
             waves="light"
-            icon="add"
+            icon="delete"
             onClick={this.handleDeleteClick}
             />
         </td>

@@ -1,10 +1,8 @@
 import React from 'react';
-import {Navbar, NavItem} from 'react-materialize';
+import {Navbar} from 'react-materialize';
 
 const Header = () => (
-  <Navbar brand="PetShop" right>
-    <NavItem href="get-started.html">Homepage</NavItem>
-  </Navbar>
+  <Navbar brand="PetShop" className="teal lighten-2" left/>
 );
 
 export default Header;

@@ -1,23 +1,6 @@
   import fetch from 'isomorphic-fetch';
   import {apiUrl} from '../../config.js';
-  /* action types */
-  export const REQUEST_PETS = 'REQUEST_PETS';
-  export const REQUEST_PETS_FAILURE = 'REQUEST_PETS_FAILURE';
-
-  // pet list
-  export const FETCH_PETS_SUCCESS = 'FETCH_PETS_SUCCESS';
-
-  // get pet
-  export const GET_PET_SUCCESS = 'GET_PET_SUCCESS';
-
-  // create pet
-  export const CREATE_PET_SUCCESS = 'CREATE_PET_SUCCESS';
-
-  // update pet
-  export const UPDATE_PET_SUCCESS = 'UPDATE_PET_SUCCESS';
-
-  // delete pet
-  export const DELETE_PET_SUCCESS = 'DELETE_PET_SUCCESS';
+  import * as types from './typeActions';
 
   function fetchParamaters(method = 'GET', body) {
     return {
@@ -124,54 +107,55 @@
   }
 
    /*  request pets actions */
-  function requestPets() {
+  export function requestPets() {
     return {
-      type: REQUEST_PETS
+      type: types.REQUEST_PETS
     };
   }
 
-  function requestPetsFailure() {
+  export function requestPetsFailure(error) {
     return {
-      type: REQUEST_PETS_FAILURE
+      type: types.REQUEST_PETS_FAILURE,
+      error
     };
   }
 
   /* create pet actions */
-  function addPetSuccess(pet) {
+  export function addPetSuccess(pet) {
     return {
-      type: CREATE_PET_SUCCESS,
+      type: types.CREATE_PET_SUCCESS,
       pet
     };
   }
 
   /*  pet list actions */
-  function fetchPetSuccess(pets) {
+  export function fetchPetSuccess(pets) {
     return {
-      type: FETCH_PETS_SUCCESS,
+      type: types.FETCH_PETS_SUCCESS,
       pets
     };
   }
 
   /* get pet action */
-  function getPetSuccess(pet) {
+  export function getPetSuccess(pet) {
     return {
-      type: GET_PET_SUCCESS,
+      type: types.GET_PET_SUCCESS,
       pet
     };
   }
 
   /* update pet actions */
-  function updatePetSuccess(pet) {
+  export function updatePetSuccess(pet) {
     return {
-      type: UPDATE_PET_SUCCESS,
+      type: types.UPDATE_PET_SUCCESS,
       pet
     };
   }
 
   /* delete pet actions */
-  function deletePetSuccess(pet) {
+  export function deletePetSuccess(pet) {
     return {
-      type: DELETE_PET_SUCCESS,
+      type: types.DELETE_PET_SUCCESS,
       pet
     };
   }

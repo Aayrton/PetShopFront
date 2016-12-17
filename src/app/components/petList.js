@@ -3,7 +3,7 @@ import Pet from './pet';
 import {Table} from 'react-materialize';
 
 const PetList = ({pets, deletePet}) => (
-  <Table>
+  <Table className="responsive-table highlight striped">
     <thead>
       <tr>
         <th>ID</th>
@@ -11,7 +11,6 @@ const PetList = ({pets, deletePet}) => (
         <th>Size</th>
         <th>Weight</th>
         <th>Price</th>
-        <th>CreatedAt</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -24,7 +23,6 @@ const PetList = ({pets, deletePet}) => (
           size={pet.size}
           weight={pet.weight}
           price={pet.price}
-          createdAt={pet.createdAt}
           deletePet={deletePet}
           />
       )}

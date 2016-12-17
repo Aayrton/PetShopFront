@@ -67,17 +67,20 @@ class PetForm extends React.Component {
             <Col s={12}>
               <Input
                 type="text"
-                label="Name"
+                label="* Name"
+                placeholder="Example: Dog"
                 value={this.state.name}
                 onChange={this.handleNameChange}
                 maxLength={16}
+                required
                 />
             </Col>
             <br/>
             <Col s={12}>
               <Input
                 type="text"
-                label="Size"
+                label="Size (m)"
+                placeholder="Example: 1.2"
                 value={this.state.size}
                 onChange={this.handleSizeChange}
                 maxLength={16}
@@ -87,7 +90,8 @@ class PetForm extends React.Component {
             <Col s={12}>
               <Input
                 type="text"
-                label="Weight"
+                label="Weight (kg)"
+                placeholder="Example: 20"
                 value={this.state.weight}
                 onChange={this.handleWeightChange}
                 maxLength={16}
@@ -97,7 +101,9 @@ class PetForm extends React.Component {
             <Col s={12}>
               <Input
                 type="text"
-                label="Price"
+                label="* Price (€)"
+                placeholder="Example: 600"
+                required
                 value={this.state.price}
                 onChange={this.handlePriceChange}
                 maxLength={16}
@@ -106,7 +112,11 @@ class PetForm extends React.Component {
             <br/>
           </Row>
           <br/>
-          <button className="btn waves-effect waves-light" type="submit">Submit</button>
+          <Row>
+            <Col s={12}>
+              <button className="btn waves-effect waves-light full-width" type="submit">Submit</button>
+            </Col>
+          </Row>
         </form>
       </div>
     );

@@ -6,14 +6,17 @@ import {Row, Col} from 'react-materialize';
 class Homepage extends React.Component {
   render() {
     return (
-      <Row>
-        <Col s={4}>
-          <AddPet edit={false}/>
-        </Col>
-        <Col s={8}>
-          <PetListContainer/>
-        </Col>
-      </Row>
+      <section>
+        <h2>Homepage</h2>
+        <Row>
+          <Col m={4} s={12} className="petshop-card">
+            <AddPet edit={false}/>
+          </Col>
+          <Col m={8} s={12}>
+            <PetListContainer/>
+          </Col>
+        </Row>
+      </section>
     );
   }
 }

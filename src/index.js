@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import {fetchPets} from './app/actions/petActions';
 import configStore from './app/store/configStore';
 import routes from './routes';
+import './app/style/settings.scss';
 import './index.scss';
 
 const store = configStore();

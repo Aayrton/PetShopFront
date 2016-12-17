@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import PetForm from './petForm';
+import {Row, Col} from 'react-materialize';
 
 class UpdatePage extends React.Component {
   constructor(props) {
@@ -11,11 +12,18 @@ class UpdatePage extends React.Component {
 
   render() {
     return (
-      <PetForm
-        edit={this.state.edit}
-        oldPet={this.props.pet}
-        updatePetAction={this.props.updatePet}
-        />
+      <section>
+        <Row>
+          <Col offset="m4" m={4}>
+            <h2>Update</h2>
+            <PetForm
+              edit={this.state.edit}
+              oldPet={this.props.pet}
+              updatePetAction={this.props.updatePet}
+              />
+          </Col>
+        </Row>
+      </section>
     );
   }
 }
