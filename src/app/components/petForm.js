@@ -78,7 +78,7 @@ class PetForm extends React.Component {
             <br/>
             <Col s={12}>
               <Input
-                type="text"
+                type="number"
                 label="Size (m)"
                 placeholder="Example: 1.2"
                 value={this.state.size}
@@ -89,7 +89,7 @@ class PetForm extends React.Component {
             <br/>
             <Col s={12}>
               <Input
-                type="text"
+                type="number"
                 label="Weight (kg)"
                 placeholder="Example: 20"
                 value={this.state.weight}
@@ -100,7 +100,7 @@ class PetForm extends React.Component {
             <br/>
             <Col s={12}>
               <Input
-                type="text"
+                type="number"
                 label="* Price (€)"
                 placeholder="Example: 600"
                 required
@@ -113,7 +113,7 @@ class PetForm extends React.Component {
           </Row>
           <br/>
           <Row>
-            <Col s={12}>
+            <Col s={6} offset="s2">
               <button className="btn waves-effect waves-light full-width" type="submit">Submit</button>
             </Col>
           </Row>
@@ -132,8 +132,7 @@ PetForm.propTypes = {
     name: PropTypes.string.isRequired,
     size: PropTypes.number,
     weight: PropTypes.number,
-    price: PropTypes.number,
-    createdAt: PropTypes.string
+    price: PropTypes.number
   })
 };
 

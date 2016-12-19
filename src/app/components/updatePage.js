@@ -35,8 +35,7 @@ UpdatePage.propTypes = {
     name: PropTypes.string.isRequired,
     size: PropTypes.number,
     weight: PropTypes.number,
-    price: PropTypes.number,
-    createdAt: PropTypes.string
+    price: PropTypes.number
   }).isRequired
 };
 

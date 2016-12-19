@@ -46,7 +46,6 @@ Pet.propTypes = {
   size: PropTypes.number,
   weight: PropTypes.number,
   price: PropTypes.number,
-  createdAt: PropTypes.string,
   deletePet: PropTypes.func.isRequired
 };
 

@@ -7,7 +7,6 @@ class Homepage extends React.Component {
   render() {
     return (
       <section>
-        <h2>Homepage</h2>
         <Row>
           <Col m={4} s={12} className="petshop-card">
             <AddPet edit={false}/>

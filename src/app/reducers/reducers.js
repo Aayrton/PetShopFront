@@ -2,10 +2,9 @@ import {
   REQUEST_PETS, REQUEST_PETS_FAILURE, FETCH_PETS_SUCCESS,
   CREATE_PET_SUCCESS, DELETE_PET_SUCCESS, UPDATE_PET_SUCCESS,
   GET_PET_SUCCESS
-} from '../actions/typeActions';
+} from '../actions/actionTypes';
 
 const initialState = {
-  isFetching: false,
   status: 0,
   message: '',
   pets: [],
@@ -16,7 +15,8 @@ function petApp(state = initialState, action) {
   switch (action.type) {
     case REQUEST_PETS:
       return Object.assign({}, state, {
-        status: 0
+        status: 0,
+        message: ''
       });
 
     case REQUEST_PETS_FAILURE:
@@ -48,6 +48,8 @@ function petApp(state = initialState, action) {
       return Object.assign({}, state, {
         status: 1,
         message: 'The pet was successfully updated',
+        pets: [...state.pets.filter(pet => pet.id !== action.pet.id),
+          Object.assign({}, action.pet)],
         pet: action.pet
       });
 

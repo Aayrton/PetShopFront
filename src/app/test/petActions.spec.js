@@ -1,56 +1,107 @@
 import React from 'react';
 import * as actions from '../actions/petActions';
 import {expect} from 'chai';
-import * as types from '../actions/typeActions';
+import * as types from '../actions/actionTypes';
+import configStore from '../store/configStore';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import fetch from 'isomorphic-fetch';
+import {apiUrl} from '../../config.js';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 let pet = {
-  name: 'Cat',
-  size: 1,
-  weight: 60,
-  price: 500
+    id: 1,
+    name: 'Dog',
+    size: 1,
+    weight: 40,
+    price: 600
 };
+
+// Clean database
+fetch(`${apiUrl}/pets/deleteAll`)
+  .then(response => {
+    if (response.status >= 400) {
+      throw Error(response.statusText);
+    }
+    return response.json();
+  })
+  .then(response => {console.log('Success cleaning database: ', response)})
+  .catch(error => {console.log('Error cleaning database: ', error)});
 
 
 describe('pets actions', () => {
-  it('addPet should call api and add pet')
-  it('addPetSuccess should create ADD_PET_SUCCESS action', () => {
-    expect(actions.addPetSuccess(pet)).to.deep.equal({
-      type: types.CREATE_PET_SUCCESS,
-      pet
+    it('it create CREATE_PET_SUCCESS after addPet has been done', () => {
+      const expectedActions = [
+        { type: types.REQUEST_PETS },
+        { type: types.CREATE_PET_SUCCESS, pet }
+      ];
+
+      const store = mockStore({});
+
+      return store.dispatch(actions.addPet(pet))
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        })
     });
-  });
 
-  // it('deleteTodo should create DELETE_TODO action', () => {
-  //   expect(actions.deleteTodo(1)).toEqual({
-  //     type: types.DELETE_TODO,
-  //     id: 1
-  //   });
-  // });
+    it('it create FETCH_PET_SUCCESS after fetchPets has been done', () => {
+      const expectedActions = [
+        { type: types.REQUEST_PETS },
+        { type: types.FETCH_PETS_SUCCESS, pets: [pet] }
+      ];
 
-  // it('editTodo should create EDIT_TODO action', () => {
-  //   expect(actions.editTodo(1, 'Use Redux everywhere')).toEqual({
-  //     type: types.EDIT_TODO,
-  //     id: 1,
-  //     text: 'Use Redux everywhere'
-  //   });
-  // });
+      const store = mockStore({});
 
-  // it('completeTodo should create COMPLETE_TODO action', () => {
-  //   expect(actions.completeTodo(1)).toEqual({
-  //     type: types.COMPLETE_TODO,
-  //     id: 1
-  //   });
-  // });
+      return store.dispatch(actions.fetchPets())
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        })
+    });
 
-  // it('completeAll should create COMPLETE_ALL action', () => {
-  //   expect(actions.completeAll()).toEqual({
-  //     type: types.COMPLETE_ALL
-  //   });
-  // });
+    it('it create GET_PET_SUCCESS after getPet has been done', () => {
+      const expectedActions = [
+        { type: types.REQUEST_PETS },
+        { type: types.GET_PET_SUCCESS, pet }
+      ];
 
-  // it('clearCompleted should create CLEAR_COMPLETED action', () => {
-  //   expect(actions.clearCompleted()).toEqual({
-  //     type: types.CLEAR_COMPLETED
-  //   });
-  // });
+      const store = mockStore({});
+
+      return store.dispatch(actions.getPet(pet.id))
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        })
+    });
+
+    it('it create UPDATE_PET_SUCCESS after updatePet has been done', () => {
+      pet.name = 'Cat';
+
+      const expectedActions = [
+        { type: types.REQUEST_PETS },
+        { type: types.UPDATE_PET_SUCCESS, pet }
+      ];
+
+      const store = mockStore({});
+
+      return store.dispatch(actions.updatePet(pet))
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        })
+    });
+
+    it('it create DELETE_PET_SUCCESS after deletePet has been done', () => {
+      const expectedActions = [
+        { type: types.REQUEST_PETS },
+        { type: types.DELETE_PET_SUCCESS, pet }
+      ];
+
+      const store = mockStore({});
+
+      return store.dispatch(actions.deletePet(pet.id))
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        })
+    });
+
 });

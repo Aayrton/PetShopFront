@@ -1,6 +1,7 @@
   import fetch from 'isomorphic-fetch';
   import {apiUrl} from '../../config.js';
-  import * as types from './typeActions';
+  import * as types from './actionTypes';
+  import Pet from '../models/pet';
 
   function fetchParamaters(method = 'GET', body) {
     return {
@@ -16,7 +17,7 @@
     return dispatch => {
       dispatch(requestPets());
 
-      return fetch(`${apiUrl}/pets/create`, requestParams)
+      return fetch(`${apiUrl}/pets`, requestParams)
       .then(response => {
         if (response.status >= 400) {
           throw Error(response.statusText);
@@ -34,7 +35,7 @@
     return dispatch => {
       dispatch(requestPets());
 
-      return fetch(`${apiUrl}/pets?sort=createdAt DESC`)
+      return fetch(`${apiUrl}/pets?sort=id DESC`)
       .then(response => {
         if (response.status >= 400) {
           throw Error(response.statusText);
@@ -124,7 +125,7 @@
   export function addPetSuccess(pet) {
     return {
       type: types.CREATE_PET_SUCCESS,
-      pet
+      pet: new Pet(pet)
     };
   }
 

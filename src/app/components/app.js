@@ -25,7 +25,10 @@ class App extends React.Component {
       level = 'error';
     }
 
-    if (nextProps.message.length > 0) {
+    console.log('old status: ', this.props.status);
+    console.log('new status: ', nextProps.status);
+
+    if (this.props.status === 0 && nextProps.status !== 0 && nextProps.message.length > 0) {
       this._notificationSystem.addNotification({
         message: nextProps.message,
         level
